@@ -10,6 +10,7 @@ import { DownloadInput } from './components/DownloadInput';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 const App = () => {
+  
   const [code, setCode] = useState<String>('');
   const [spinner, setSpinner] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
