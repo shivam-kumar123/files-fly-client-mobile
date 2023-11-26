@@ -80,3 +80,9 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+#Light Mode
+file:///home/shivam/Pictures/Screenshots/light.png
+
+#Dark Mode
+![dark](https://github.com/shivam-kumar123/files-fly-client-mobile/assets/75497119/7571f261-0b90-4c39-9f55-827ff2deabe9)
