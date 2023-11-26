@@ -81,8 +81,7 @@ To learn more about React Native, take a look at the following resources:
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
-#Light Mode
-file:///home/shivam/Pictures/Screenshots/light.png
 
-#Dark Mode
+![light](https://github.com/shivam-kumar123/files-fly-client-mobile/assets/75497119/f580c0c7-43cb-4ec1-b22b-d956b896044e)
+
 ![dark](https://github.com/shivam-kumar123/files-fly-client-mobile/assets/75497119/7571f261-0b90-4c39-9f55-827ff2deabe9)
