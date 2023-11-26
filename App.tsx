@@ -16,6 +16,10 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [isFilePicked , setIsFilePicked] = useState<boolean>(false);
 
+  const toggleDarkMode = (isOn: boolean) => {
+    setIsDarkMode(isOn);
+  };
+  
   useEffect(() => {
     setSpinner(false);
     setIsFilePicked(false);
@@ -28,10 +32,6 @@ const App = () => {
       return () => clearTimeout(reloadTimeout);
     }
   }, [code]);
-
-  const toggleDarkMode = (isOn: boolean) => {
-    setIsDarkMode(isOn);
-  };
 
   return (
     <SafeAreaView style={[styles.appBackgroundColor, { backgroundColor: isDarkMode ? 'black' : 'honeydew' }]}>
