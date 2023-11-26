@@ -2,8 +2,7 @@
 #
 .DS_Store
 
-android/
-gradle.properties
+android/gradle.properties
 
 # Xcode
 #
