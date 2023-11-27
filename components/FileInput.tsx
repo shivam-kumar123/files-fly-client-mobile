@@ -48,7 +48,11 @@ import {
           body: formData
         });
         const responseData = await response.json();
-        setCode(responseData.fileId);
+        if (responseData.fileId === 0) {
+          setIsServerOverloaded(true);
+        } else {
+          setCode(responseData.fileId);
+        }
       } catch (error) {
         if(isFilePicked) {
           setIsServerOverloaded(true);
