@@ -66,7 +66,7 @@ export const DownloadInput = ({ isDarkMode }: Props) => {
             useDownloadManager: true,
             notification: true,
             title: 'File Download',
-            path: filePath + '/download_' + Math.floor(date.getDate() + date.getSeconds()) + '.ext',
+            path: filePath + '/download_' + Math.floor(date.getDate() + date.getSeconds()),
             description: 'File Download',
           },
         }).fetch('GET', fileURL);
