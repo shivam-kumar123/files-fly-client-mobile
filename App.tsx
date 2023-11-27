@@ -15,6 +15,7 @@ const App = () => {
   const [spinner, setSpinner] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [isFilePicked , setIsFilePicked] = useState<boolean>(false);
+  const [fileName, setFileName] = useState<String | null>(null);
 
   const toggleDarkMode = (isOn: boolean) => {
     setIsDarkMode(isOn);
@@ -48,11 +49,21 @@ const App = () => {
         style={styles.toggleBtn}
       />
 
+      {
+        fileName !== null && 
+        <Text style={[styles.fileInfo, {
+          color: isDarkMode ? 'white' : 'black'
+        }]}>
+          {fileName}
+        </Text>
+      }
+
       <FileInput
         setCode={setCode}
         setSpinner={setSpinner}
         isFilePicked={isFilePicked}
         setIsFilePicked={setIsFilePicked}
+        setFileName={setFileName}
       />
 
       {code !== '' && <Text style={[styles.heading, {
@@ -63,6 +74,7 @@ const App = () => {
 
       <DownloadInput 
         isDarkMode={isDarkMode}
+        fileName={fileName}
       />
     </SafeAreaView>
   );
@@ -83,5 +95,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 28, 
     right: 40, 
+  },
+  fileInfo: {
+    fontSize: 22,
+    textAlign:'center',
+    marginTop: 70,
   }
 });

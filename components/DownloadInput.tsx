@@ -12,9 +12,10 @@ import RNFetchBlob from 'rn-fetch-blob';
 
 type Props = {
   isDarkMode: boolean;
+  fileName: String | null;
 };
 
-export const DownloadInput = ({ isDarkMode }: Props) => {
+export const DownloadInput = ({ isDarkMode, fileName }: Props) => {
   const [inputCode, setInputCode] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
 
@@ -54,7 +55,7 @@ export const DownloadInput = ({ isDarkMode }: Props) => {
       const date = new Date();
       try {
         ToastAndroid.showWithGravity(
-            'File downloaded Started!',
+            'File download Started!',
             ToastAndroid.LONG,
             ToastAndroid.TOP
           );
@@ -66,7 +67,7 @@ export const DownloadInput = ({ isDarkMode }: Props) => {
             useDownloadManager: true,
             notification: true,
             title: 'File Download',
-            path: filePath + '/download_' + Math.floor(date.getDate() + date.getSeconds()),
+            path: filePath + '/download_' + fileName,
             description: 'File Download',
           },
         }).fetch('GET', fileURL);
@@ -75,7 +76,7 @@ export const DownloadInput = ({ isDarkMode }: Props) => {
 
         // Show a success message to the user
         ToastAndroid.showWithGravity(
-          'File downloaded successfully!',
+          'File download successfull!',
           ToastAndroid.LONG,
           ToastAndroid.CENTER
         );

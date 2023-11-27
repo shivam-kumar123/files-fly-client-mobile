@@ -13,9 +13,10 @@ import {
     setSpinner: (spinner: boolean) => void;
     isFilePicked: boolean
     setIsFilePicked: (isFilePicked: boolean) => void;
+    setFileName: (fileName: String | null) => void;
   }
   
-  export const FileInput = ({setCode, setSpinner, isFilePicked, setIsFilePicked}: Props) => {
+  export const FileInput = ({setCode, setSpinner, isFilePicked, setIsFilePicked, setFileName}: Props) => {
   
     const [limitMsg, setLimitMsg] = useState<boolean>(false);
     const [isServerOverloaded , setIsServerOverloaded] = useState<boolean>(false);
@@ -36,6 +37,7 @@ import {
           return;
         }
         setSpinner(true);
+        setFileName(document.name);
         const formData = new FormData();
         formData.append('file', {
           uri: document.uri,
@@ -102,7 +104,7 @@ import {
   
   const styles = StyleSheet.create({
     btn: {
-      marginTop: 100,
+      marginTop: 30,
       marginLeft: 25,
       marginRight: 25,
     },
