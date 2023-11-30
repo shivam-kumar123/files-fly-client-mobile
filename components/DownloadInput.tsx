@@ -7,14 +7,17 @@ import {
   Button,
   PermissionsAndroid,
   ToastAndroid,
+  Keyboard,
 } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 
 type Props = {
   fileName: String | null;
+  isKeyboardActive: boolean;
+  setIsKeyboardActive: (isKeyboardActive: boolean) => void;
 };
 
-export const DownloadInput = ({ fileName }: Props) => {
+export const DownloadInput = ({ fileName, isKeyboardActive, setIsKeyboardActive }: Props) => {
   const [inputCode, setInputCode] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
 
@@ -96,6 +99,27 @@ export const DownloadInput = ({ fileName }: Props) => {
     setErrorMsg('');
     setInputCode(text);
   };
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setIsKeyboardActive(true);
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setIsKeyboardActive(false);
+      }
+    );
+
+    return () => {
+      // Clean up event listeners when the component is unmounted
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, [isKeyboardActive]);
 
   return (
     <View>

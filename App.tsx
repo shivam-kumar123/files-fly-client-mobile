@@ -15,6 +15,7 @@ const App = () => {
   const [spinner, setSpinner] = useState<boolean>(false);
   const [isFilePicked , setIsFilePicked] = useState<boolean>(false);
   const [fileName, setFileName] = useState<String | null>(null);
+  const [isKeyboardActive, setIsKeyboardActive] = useState<boolean>(false);
   const panelRef = useRef<any>(null);
 
   
@@ -26,6 +27,8 @@ const App = () => {
       // Set a timeout to simulate a reload after 200 seconds
       const reloadTimeout = setTimeout(() => {
         setCode(''); 
+        setFileName(null);
+        setIsFilePicked(false);
       }, 200000); // 200 seconds
       // Clear the timeout if the component unmounts or code changes before the timeout
       return () => clearTimeout(reloadTimeout);
@@ -43,18 +46,27 @@ const App = () => {
         </Text>
       }
 
-      <FileInput
+      {
+        spinner ? 
+        <ActivityIndicator size='large' color={'midnightblue'} /> :
+        <FileInput
         setCode={setCode}
         setSpinner={setSpinner}
         isFilePicked={isFilePicked}
         setIsFilePicked={setIsFilePicked}
         setFileName={setFileName}
       />
-
-      {spinner && <ActivityIndicator size='large' color={'midnightblue'} />}
+      }
 
       {
-        code !== '' && 
+        isKeyboardActive && code !== '' && 
+        <Text style={styles.heading}>
+          code: {code} 
+        </Text>
+      }
+
+      {
+        code !== '' && isKeyboardActive === false && 
         <BottomSheet ref={ref => panelRef.current = ref}>
           <Text style={styles.bottomSheet}>
             file code: {code}
@@ -64,6 +76,8 @@ const App = () => {
 
       <DownloadInput 
         fileName={fileName}
+        isKeyboardActive={isKeyboardActive}
+        setIsKeyboardActive={setIsKeyboardActive}
       /> 
 
     </SafeAreaView>
@@ -86,14 +100,13 @@ const styles = StyleSheet.create({
   fileInfo: {
     fontSize: 22,
     textAlign:'center',
-    marginTop: 70,
+    marginTop: 40,
     color: 'black',
   },
   bottomSheet: {
     paddingVertical: 20,
     fontSize: 28,
     color: 'black',
-    zIndex: 1,
   }
  
 });
