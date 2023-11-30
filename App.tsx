@@ -8,7 +8,6 @@ import { useState, useEffect, useRef } from 'react';
 import { FileInput } from './components/FileInput';
 import { DownloadInput } from './components/DownloadInput';
 import BottomSheet from 'react-native-simple-bottom-sheet';
-import Toast from 'react-native-toast-message';
 
 const App = () => {
   
@@ -22,14 +21,8 @@ const App = () => {
   useEffect(() => {
     setSpinner(false);
     setIsFilePicked(false);
-    const showToast = () => {
-      Toast.show({
-        type: 'success',
-        text2: 'Check bottom for code'
-      });
-    }
+    
     if (code !== '') {
-      showToast();
       // Set a timeout to simulate a reload after 200 seconds
       const reloadTimeout = setTimeout(() => {
         setCode(''); 
@@ -50,8 +43,6 @@ const App = () => {
         </Text>
       }
 
-      {code !== '' && <Toast />}
-
       <FileInput
         setCode={setCode}
         setSpinner={setSpinner}
@@ -66,7 +57,7 @@ const App = () => {
         code !== '' && 
         <BottomSheet ref={ref => panelRef.current = ref}>
           <Text style={styles.bottomSheet}>
-            uploaded file code: {code}
+            file code: {code}
           </Text>
         </BottomSheet>
       }
@@ -96,11 +87,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign:'center',
     marginTop: 70,
+    color: 'black',
   },
   bottomSheet: {
-    paddingVertical: 40,
+    paddingVertical: 20,
     fontSize: 28,
-    color: 'black'
+    color: 'black',
+    zIndex: 1,
   }
  
 });
