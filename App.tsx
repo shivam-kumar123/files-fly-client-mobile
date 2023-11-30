@@ -18,6 +18,14 @@ const App = () => {
   const [isKeyboardActive, setIsKeyboardActive] = useState<boolean>(false);
   const panelRef = useRef<any>(null);
 
+  const formatFileName = (name : String) => {
+    if (name && name.length > 30) {
+      const firstPart = name.substring(0, 10);
+      const fileExtension = name.split('.').pop();
+      return `${firstPart}.${fileExtension}`;
+    }
+    return name;
+  };
   
   useEffect(() => {
     setSpinner(false);
@@ -42,7 +50,7 @@ const App = () => {
       {
         fileName !== null && 
         <Text style={styles.fileInfo}>
-          {fileName}
+          {formatFileName(fileName)}
         </Text>
       }
 
@@ -107,6 +115,5 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     fontSize: 28,
     color: 'black',
-  }
- 
+  },
 });

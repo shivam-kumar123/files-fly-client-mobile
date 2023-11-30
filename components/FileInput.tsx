@@ -81,12 +81,10 @@ import {
     return (
       <View style={ styles.btn }>
 
-        {/* <Button 
-          title='Upload Document 📑 (max 200 mb)'
+        <TouchableHighlight 
           onPress={handleFileUpload}
-          /> */}
-
-        <TouchableHighlight onPress={handleFileUpload}>
+          underlayColor="transparent"
+        >
           <Image 
             source={{uri: 'https://png.pngtree.com/png-clipart/20190921/original/pngtree-file-upload-icon-png-image_4717174.jpg'}}
             style={styles.image}
