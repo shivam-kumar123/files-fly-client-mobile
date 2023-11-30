@@ -3,6 +3,8 @@ import {
     Button,
     StyleSheet,
     Text,
+    TouchableHighlight,
+    Image,
   } from 'react-native';
   import React from 'react';
   import DocumentPicker from "react-native-document-picker";
@@ -78,11 +80,18 @@ import {
 
     return (
       <View style={ styles.btn }>
-  
-        <Button 
+
+        {/* <Button 
           title='Upload Document 📑 (max 200 mb)'
           onPress={handleFileUpload}
-          />
+          /> */}
+
+        <TouchableHighlight onPress={handleFileUpload}>
+          <Image 
+            source={{uri: 'https://png.pngtree.com/png-clipart/20190921/original/pngtree-file-upload-icon-png-image_4717174.jpg'}}
+            style={styles.image}
+        />
+        </TouchableHighlight>
 
         {
           limitMsg && 
@@ -113,5 +122,11 @@ import {
         textAlign: 'center',
         marginTop: 50,
         color: 'red',
-    }
+    },
+    image: {
+      width: 100,
+      height: 100,
+      alignSelf: 'center',
+      marginTop: 0,
+    } 
   });

@@ -11,11 +11,10 @@ import {
 import RNFetchBlob from 'rn-fetch-blob';
 
 type Props = {
-  isDarkMode: boolean;
   fileName: String | null;
 };
 
-export const DownloadInput = ({ isDarkMode, fileName }: Props) => {
+export const DownloadInput = ({ fileName }: Props) => {
   const [inputCode, setInputCode] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
 
@@ -101,26 +100,16 @@ export const DownloadInput = ({ isDarkMode, fileName }: Props) => {
   return (
     <View>
       <Text
-        style={[
-          styles.text,
-          {
-            color: isDarkMode ? 'white' : 'black',
-          },
-        ]}
+        style={styles.text}
       >
         Download File
       </Text>
 
       <TextInput
-        style={[
-          styles.input,
-          {
-            color: isDarkMode ? 'white' : 'black',
-          },
-        ]}
+        style={styles.input}
         onChangeText={handleInputCode}
         placeholder="Enter 6-digit Code"
-        placeholderTextColor={isDarkMode ? 'white' : '#000'}
+        placeholderTextColor={'#000'}
         value={inputCode}
       />
 
@@ -130,12 +119,7 @@ export const DownloadInput = ({ isDarkMode, fileName }: Props) => {
 
       {errorMsg !== '' && (
         <Text
-          style={[
-            styles.err,
-            {
-              color: isDarkMode ? 'white' : 'black',
-            },
-          ]}
+          style={styles.err}
         >
           {errorMsg}
         </Text>
@@ -149,12 +133,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 50,
     textAlign: 'center',
+    color: 'black',
   },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    color: 'black',
   },
   btn: {
     marginTop: 25,
@@ -165,5 +151,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
     marginTop: 50,
+    color: 'black',
   },
 });
