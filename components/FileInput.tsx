@@ -25,7 +25,6 @@ import {
 
     const handleFileUpload = async () => {
       try {
-        setCode('');
         setLimitMsg(false);
         const document = await DocumentPicker.pickSingle();
         if (document && document.size) {
@@ -34,6 +33,7 @@ import {
             setLimitMsg(true);
             return;
           }
+          setCode('');
         } else {
           console.warn("Invalid or null document");
           return;
