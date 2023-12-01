@@ -7,19 +7,22 @@ import {
   Button,
   PermissionsAndroid,
   ToastAndroid,
-  Keyboard,
 } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
+import Sound from 'react-native-sound';
 
-type Props = {
-  fileName: String | null;
-  isKeyboardActive: boolean;
-  setIsKeyboardActive: (isKeyboardActive: boolean) => void;
-};
 
-export const DownloadInput = ({ fileName, isKeyboardActive, setIsKeyboardActive }: Props) => {
+export const DownloadInput = () => {
   const [inputCode, setInputCode] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
+
+  const notificationSound = new Sound('notification.mp3', Sound.MAIN_BUNDLE, (error) => {
+    if (error) {
+      console.error('Failed to load the sound', error);
+    } else {
+      notificationSound.setVolume(0.7);
+    }
+  });  
 
   const requestStoragePermission = async () => {
     try {
@@ -69,7 +72,8 @@ export const DownloadInput = ({ fileName, isKeyboardActive, setIsKeyboardActive 
             useDownloadManager: true,
             notification: true,
             title: 'File Download',
-            path: filePath + '/download_' + fileName,
+            // path: filePath + '/download_' + fileName,
+            path: filePath + '/download_',
             description: 'File Download',
           },
         }).fetch('GET', fileURL);
@@ -82,6 +86,18 @@ export const DownloadInput = ({ fileName, isKeyboardActive, setIsKeyboardActive 
           ToastAndroid.LONG,
           ToastAndroid.CENTER
         );
+        try {
+          notificationSound.play((success) => {
+            if (success) {
+              console.log('Notification sound played successfully');
+            } else {
+              console.error('Notification sound failed to play');
+            }
+          });
+        } catch (error) {
+          console.error('Error downloading file:', error);
+        }
+        
       } catch (error) {
         console.error('Error downloading file:', error);
 
@@ -99,27 +115,6 @@ export const DownloadInput = ({ fileName, isKeyboardActive, setIsKeyboardActive 
     setErrorMsg('');
     setInputCode(text);
   };
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setIsKeyboardActive(true);
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setIsKeyboardActive(false);
-      }
-    );
-
-    return () => {
-      // Clean up event listeners when the component is unmounted
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, [isKeyboardActive]);
 
   return (
     <View>

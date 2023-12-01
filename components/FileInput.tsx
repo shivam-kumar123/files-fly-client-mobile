@@ -94,7 +94,7 @@ import {
         {
           limitMsg && 
           <Text style={styles.err}>
-            File Upload Limit Exceeded !!!
+            File Upload Limit is 200 MB's
           </Text>
         }
 
@@ -125,6 +125,6 @@ import {
       width: 100,
       height: 100,
       alignSelf: 'center',
-      marginTop: 0,
+      marginTop: 100,
     } 
   });
