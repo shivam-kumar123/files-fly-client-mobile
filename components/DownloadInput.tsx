@@ -20,7 +20,7 @@ export const DownloadInput = () => {
     if (error) {
       console.error('Failed to load the sound', error);
     } else {
-      notificationSound.setVolume(0.7);
+      notificationSound.setVolume(0.5);
     }
   });  
 
