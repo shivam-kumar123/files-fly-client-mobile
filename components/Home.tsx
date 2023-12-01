@@ -7,7 +7,9 @@ import {
   import { useState, useEffect, useRef } from 'react';
   import { FileInput } from './FileInput';
   import BottomSheet from 'react-native-simple-bottom-sheet';
-  
+import { DownloadInput } from './DownloadInput';
+import Dummy  from './Dummy'
+
   const Home = () => {
     
     const [code, setCode] = useState<String>('');
@@ -71,7 +73,11 @@ import {
             </Text>
           </BottomSheet>
         }
-  
+        
+        <Dummy />
+
+        <DownloadInput fileName={fileName} />
+
       </SafeAreaView>
     );
   };

@@ -11,8 +11,11 @@ import {
 import RNFetchBlob from 'rn-fetch-blob';
 import Sound from 'react-native-sound';
 
+type Props = {
+  fileName: String | null;
+}
 
-export const DownloadInput = () => {
+export const DownloadInput = ({fileName}: Props) => {
   const [inputCode, setInputCode] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
 
@@ -72,8 +75,7 @@ export const DownloadInput = () => {
             useDownloadManager: true,
             notification: true,
             title: 'File Download',
-            // path: filePath + '/download_' + fileName,
-            path: filePath + '/download_',
+            path: filePath + '/download_' + fileName,
             description: 'File Download',
           },
         }).fetch('GET', fileURL);
