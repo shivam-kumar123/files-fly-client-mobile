@@ -17,7 +17,7 @@ type Props = {
 
 export const DownloadInput = ({fileName}: Props) => {
   const [inputCode, setInputCode] = useState<string>('');
-  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [disableButton, setDisableButton] = useState<boolean>(true);
 
   const notificationSound = new Sound('notification.mp3', Sound.MAIN_BUNDLE, (error) => {
     if (error) {
@@ -54,9 +54,8 @@ export const DownloadInput = ({fileName}: Props) => {
 
   const handleDownloadFile = async () => {
     setInputCode('');
-    if (inputCode.length !== 6) {
-      setErrorMsg('Enter a Valid Code');
-    } else {
+    if (inputCode.length === 6) {
+      setDisableButton(false);
       await requestStoragePermission();
       const fileURL = `https://files-fly-server-mobile.onrender.com/download/${inputCode}`;
       const { config, fs } = RNFetchBlob;
@@ -114,17 +113,19 @@ export const DownloadInput = ({fileName}: Props) => {
   };
 
   const handleInputCode = (text: string) => {
-    setErrorMsg('');
     setInputCode(text);
   };
 
+  useEffect(() => {
+    if (inputCode.length === 6) {
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [inputCode]);
+
   return (
     <View>
-      <Text
-        style={styles.text}
-      >
-        Download File
-      </Text>
 
       <TextInput
         style={styles.input}
@@ -135,33 +136,21 @@ export const DownloadInput = ({fileName}: Props) => {
       />
 
       <View style={styles.btn}>
-        <Button title="Download File" onPress={handleDownloadFile} />
+        <Button title="Download File" onPress={handleDownloadFile} disabled={disableButton} />
       </View>
-
-      {errorMsg !== '' && (
-        <Text
-          style={styles.err}
-        >
-          {errorMsg}
-        </Text>
-      )}
+      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 22,
-    marginTop: 50,
-    textAlign: 'center',
-    color: 'black',
-  },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
     color: 'black',
+    marginTop: 100,
   },
   btn: {
     marginTop: 25,

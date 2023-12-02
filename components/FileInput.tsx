@@ -11,11 +11,11 @@ import {
   import { useState, useEffect } from 'react';
   
   type Props = {
-    setCode: (fileId: String) => void;
+    setCode: (fileId: string) => void;
     setSpinner: (spinner: boolean) => void;
     isFilePicked: boolean
     setIsFilePicked: (isFilePicked: boolean) => void;
-    setFileName: (fileName: String | null) => void;
+    setFileName: (fileName: string | null) => void;
   }
   
   export const FileInput = ({setCode, setSpinner, isFilePicked, setIsFilePicked, setFileName}: Props) => {
